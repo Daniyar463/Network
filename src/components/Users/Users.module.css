@@ -1,0 +1,29 @@
+.user {
+    padding: 20px;
+}
+
+.user .userPhoto {
+    width: 60px;
+}
+
+.pages.selectedPage {
+    color: rgb(21, 255, 0);
+    cursor: pointer;
+    font-size: 22px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.pagesContainer {
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+}
+
+.pages {
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+}

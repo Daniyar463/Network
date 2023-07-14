@@ -1,0 +1,107 @@
+.header {
+    grid-area: h;
+    background-color: #1e2638;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    color: fff;
+}
+
+.header a {
+    text-decoration: none;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.header img {
+    padding: 5px;
+    width: 50px;
+}
+
+.loginBlock {
+    float: right;
+}
+
+.loginBlock a {
+    color: white;
+}
+
+.colorLogin {
+    color: white;
+}
+
+.unlogged {
+    background: #17428c;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.logged {
+    background: #3b6494;
+    border-radius: 10px;
+    padding: 9px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login {
+    color: #fff;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+ .socialMedia {
+     display: inline-block;
+     padding: 10px 20px;
+     background-color: #3b6494;
+     color: white;
+     font-size: 24px;
+     font-weight: bold;
+     border-radius: 50px;
+     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+     text-transform: uppercase;
+     letter-spacing: 2px;
+     transition: transform 0.3s ease-in-out;
+     cursor: pointer;
+     position: relative;
+     overflow: hidden;
+     z-index: 1;
+     transform-style: preserve-3d;
+ }
+
+.socialMedia:before,
+.socialMedia:after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    bottom: -10px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.05);
+    transform-origin: 50% 0;
+    transition: transform 0.3s ease-in-out;
+    z-index: -1;
+}
+
+.socialMedia:before {
+    left: -80px;
+    transform: skewX(45deg);
+}
+
+.socialMedia:after {
+    right: -80px;
+    transform: skewX(-45deg);
+}
+
+.socialMedia:hover {
+    transform: scale(1.1);
+}
+
+.socialMedia:hover:before {
+    transform: translateX(80px) skewX(45deg);
+}
+
+.socialMedia:hover:after {
+    transform: translateX(-80px) skewX(-45deg);
+}
