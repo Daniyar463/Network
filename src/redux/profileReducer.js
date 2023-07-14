@@ -5,10 +5,6 @@ const initialState = {
     posts: [
         { id: 1, message: 'Hi, how are you?', likesCount: 10 },
         { id: 2, message: 'It is my first post', likesCount: 0 },
-        { id: 3, message: 'Sveta', likesCount: 14 },
-        { id: 4, message: 'Sasha', likesCount: 5 },
-        { id: 5, message: 'Runner', likesCount: 4 },
-        { id: 6, message: 'Valera', likesCount: 23 }
     ],
     profile: null,
     status: ""
@@ -99,4 +95,3 @@ const profileSlice = createSlice({
 export const { addPost, deletePost, savePhotoSuccess } = profileSlice.actions;
 
 export default profileSlice.reducer;
-

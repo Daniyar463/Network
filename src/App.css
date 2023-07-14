@@ -2,6 +2,7 @@
   margin: 0px auto;
   display: grid;
   width: 100%;
+  height: 100vh;
   grid-template-areas:
     "h h"
     "n c";
@@ -12,7 +13,7 @@
 
 .app-wrapper-content {
   grid-area: c;
-  background-color: #1e2638;
+  background-color: #4267B2;
 }
 
 body {

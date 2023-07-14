@@ -1,10 +1,10 @@
-import React from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {addMessageActionCreator, updateNewMessageActionCreator} from '../../redux/dialogsReducer'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { addMessageActionCreator, updateNewMessageActionCreator } from '../../redux/dialogsReducer'
 import DialogItem from './DialogItem/DialogItem'
 import c from './Dialogs.module.css'
 import Message from './Message/Message'
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const Dialogs = () => {
 
@@ -35,7 +35,7 @@ const Dialogs = () => {
 
     return (
         <div className={c.dialogs}>
-            <h2 style={{color: 'white', fontSize: '35px', position: 'absolute', top: '-5px',left:"50%",transform:"translateX(-50%)"}}>Messages</h2>
+            <h2 style={{ color: 'white', fontSize: '35px', position: 'absolute', top: '-5px', left: "50%", transform: "translateX(-50%)" }}>Messages</h2>
             <div className={c["dialogs-items"]}>
                 {dialogs.map(d => {
                     return <DialogItem name={d.name} id={d.id} />
@@ -56,27 +56,3 @@ const Dialogs = () => {
 }
 
 export default Dialogs;
-
-
-// import { addMessageActionCreator, updateNewMessageActionCreator } from '../../redux/dialogsReducer';
-// import Dialogs from './Dialogs';
-// import { connect } from "react-redux";
-
-// let mapStateToProps = (state) => {
-//     return {
-//         dialogs: state.dialogsPage.dialogs,
-//         messages: state.dialogsPage.messages,
-//         newMessageText: state.dialogsPage.newMessageText
-//     }
-// }
-
-// let mapDispatchToProps = (dispatch) => {
-//     return {
-//         handleAddMessage() { dispatch(addMessageActionCreator()) },
-//         handleOnMessageChange(text) { dispatch(updateNewMessageActionCreator(text)) }
-//     }
-// }
-
-// const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
-
-// export default DialogsContainer

@@ -1,13 +1,13 @@
-import React, {useEffect} from "react";
-import {Route, Routes, useNavigate} from "react-router-dom";
+import React, { useEffect } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import './App.css';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Login from "./components/Login/Login";
 import Users from "./components/Users/Users";
 import Dialogs from "./components/Dialogs/Dialogs";
-import {initializeApp} from "./redux/app-reducer";
-import {useDispatch, useSelector} from "react-redux";
+import { initializeApp } from "./redux/app-reducer";
+import { useDispatch, useSelector } from "react-redux";
 import Preloader from "./components/common/Preloader/Preloader";
 import Content from "./components/Content/Content";
 import News from "./components/News/News";

@@ -11,7 +11,7 @@ const ProfileStatus = () => {
 
 
     const [editMode, setEditMode] = useState(false);
-    const [inputText, setinputText] = useState("dfdf");
+    const [inputText, setinputText] = useState("");
 
     const deactivateEditMode = () => {
         setEditMode(false)
@@ -36,9 +36,5 @@ const ProfileStatus = () => {
         </div>
     )
 }
-
-
-
-
 
 export default ProfileStatus;

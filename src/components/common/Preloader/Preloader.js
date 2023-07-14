@@ -1,11 +1,11 @@
 import React from 'react';
 import preloader from './../../../assets/images/loader.gif';
-import './Preloader.css'
+
 
 const Preloader = ({ isFetching }) => {
     return (
-        <div>
-            {isFetching ? <img className={"preloader-img"} src={preloader} /> : null}
+        <div style={{ padding: "20px", width: "200px" }}>
+            {isFetching ? <img src={preloader} style={{ width: "100%" }} /> : null}
         </div>
     )
 }

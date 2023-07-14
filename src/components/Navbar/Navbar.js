@@ -25,6 +25,12 @@ const Navbar = () => {
                     News
                 </NavLink>
             </div>
+            <div className={s.item}>
+                <a>Music</a>
+            </div>
+            <div className={s.item}>
+                <a>Setting</a>
+            </div>
         </nav>
     );
 };

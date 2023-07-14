@@ -16,7 +16,7 @@ const News = () => {
 
     return (
         <div className="news-container">
-            <h2 style={{color: 'white', fontSize: '35px', position: 'absolute', top: '-5px',left:"50%",transform:"translateX(-50%)"}}>News</h2>
+            <h2 style={{ color: 'white', fontSize: '35px', position: 'absolute', top: '-5px', left: "50%", transform: "translateX(-50%)" }}>News</h2>
             <h2>Worldwide news</h2>
             {newsData &&
                 newsData.map(article => (
@@ -41,13 +41,13 @@ const News = () => {
                                 <a href={article.url} rel="bookmark">{article.title}</a>
                             </h2>
                             <div className="entry-meta">
-                <span className="posted-on">
-                  <a href={article.url} rel="bookmark">
-                    <time className="entry-date published" dateTime={article.publishedAt}>
-                      {article.publishedAt}
-                    </time>
-                  </a>
-                </span>
+                                <span className="posted-on">
+                                    <a href={article.url} rel="bookmark">
+                                        <time className="entry-date published" dateTime={article.publishedAt}>
+                                            {article.publishedAt}
+                                        </time>
+                                    </a>
+                                </span>
                             </div>
                         </header>
 

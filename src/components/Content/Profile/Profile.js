@@ -1,17 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay } from '@fortawesome/free-solid-svg-icons';
-import { Box, Button, Typography } from '@mui/material';
-import s from './ProfileInfo.module.css';
-import Preloader from '../../common/Preloader/Preloader';
+import { Typography, Button, TextField, Grid, Avatar } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import { getStatus, getUserProfile, savePhoto, saveProfile } from '../../../redux/profileReducer';
+import Preloader from '../../common/Preloader/Preloader';
 import userPhoto from '../../../assets/images/user.jpg';
 import ProfileDataForm from './ProfileForm';
 import ProfileStatus from './ProfileStatus';
+import s from './ProfileInfo.module.css';
+
+const useStyles = makeStyles((theme) => ({
+    profileContainer: {
+        padding: theme.spacing(2),
+    },
+    heading: {
+        color: 'white',
+        fontSize: '35px',
+        textAlign: 'center',
+        marginBottom: theme.spacing(2),
+    },
+    avatar: {
+        width: '200px',
+        height: '200px',
+        margin: '0 auto',
+    },
+}));
 
 const ProfileInfo = () => {
+    const classes = useStyles();
     const dispatch = useDispatch();
     const profile = useSelector((state) => state.profilePage.profile);
     const userId = useSelector((state) => state.auth.userId);
@@ -22,7 +39,7 @@ const ProfileInfo = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
-        if (!id && userId) {
+        if (isAuth && !id && userId) {
             id = userId;
             setIsMe(true);
         } else {
@@ -38,8 +55,8 @@ const ProfileInfo = () => {
 
     const onPhotoSelected = (e) => {
         if (e.target.files.length) {
+            console.log("files", e.target.files);
             dispatch(savePhoto(e.target.files[0]));
-            toggleModal();
         }
     };
 
@@ -60,81 +77,70 @@ const ProfileInfo = () => {
         return <Preloader isFetching={true} />;
     }
 
+    if (!isAuth && userId) {
+        return <Preloader isFetching={true} />;
+    }
+
     return (
-        <Box>
-            <Typography variant="h2" style={{ color: 'white', fontSize: '35px', textAlign: 'center', margin: '10px 0' }}>
+        <div className={classes.profileContainer}>
+            <Typography variant="h2" className={classes.heading} style={{ position: "absolute", top: "10px", top: '15px', left: "50%", transform: "translateX(-50%)" }}>
                 Profile
             </Typography>
-            <Box className={s.descriptionBlock} textAlign="center">
-                <Box mb={2}>
-                    <img
-                        src={profile.photos.large || profile.photos.small || userPhoto}
-                        className={s.mainPhoto}
-                        alt="ava"
-                        onClick={toggleModal}
-                    />
-                </Box>
-                {isMe && (
-                    <Box mb={2}>
-                        <Button variant="contained" component="label">
+            <Grid container spacing={2}>
+                <Grid item xs={12} sm={4}>
+                    <Avatar src={profile.photos.large || profile.photos.small || userPhoto} className={classes.avatar} alt="avatar" />
+                    {isMe && (
+                        <Button component="label" style={{ color: '#fff' }}>
                             Upload Photo
-                            <input type="file" accept="image/*" hidden onChange={onPhotoSelected} />
+                            <input type="file" hidden onChange={(e) => onPhotoSelected(e)} />
                         </Button>
-                    </Box>
-                )}
-                {editMode ? (
-                    <ProfileDataForm profile={profile} onSubmit={onSubmit} />
-                ) : (
-                    <ProfileData profile={profile} isMe={isMe} goToEditMode={() => setEditMode(true)} />
-                )}
-                <ProfileStatus />
-            </Box>
+                    )}
+                </Grid>
+                <Grid item xs={12} sm={8}>
+                    {editMode ? (
+                        <ProfileDataForm profile={profile} onSubmit={onSubmit} />
+                    ) : (
+                        <ProfileData profile={profile} isMe={isMe} goToEditMode={() => setEditMode(true)} />
+                    )}
+                    <ProfileStatus />
+                </Grid>
+            </Grid>
             {isModalOpen && (
-                <Box
-                    className={s.modalOverlay}
-                    onClick={toggleModal}
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                >
-                    <Box className={s.modalContent}>
-                        <img
-                            src={profile.photos.large || profile.photos.small || userPhoto}
-                            className={s.modalPhoto}
-                            alt="ava"
-                        />
-                    </Box>
-                </Box>
+                <div className={s.modalOverlay} onClick={toggleModal}>
+                    <div className={s.modalContent}>
+                        <img src={profile.photos.large || profile.photos.small || userPhoto} className={s.modalPhoto} alt="ava" />
+                    </div>
+                </div>
             )}
-        </Box>
+        </div>
     );
 };
 
 const ProfileData = ({ profile, isMe, goToEditMode }) => {
     return (
-        <Box mt={2}>
+        <div>
             {isMe && (
-                <Box mb={2} textAlign="center">
-                    <Button variant="contained" onClick={goToEditMode}>
+                <div style={{ marginBottom: "15px" }}>
+                    <Button variant="contained" color="primary" onClick={goToEditMode}>
                         Edit
                     </Button>
-                </Box>
+                </div>
             )}
-            <Typography variant="body1" mb={2}>
+            <div style={{ marginBottom: "15px" }}>
                 <b>Full name:</b> {profile.fullName}
-            </Typography>
-            <Typography variant="body1" mb={2}>
+            </div>
+            <div style={{ marginBottom: "15px" }}>
                 <b>Looking for a job:</b> {profile.lookingForAJob ? 'yes' : 'no'}
-            </Typography>
+            </div>
             {profile.lookingForAJob && (
-                <Typography variant="body1" mb={2}>
+                <div style={{ marginBottom: "15px" }}>
                     <b>My professional skills:</b> {profile.lookingForAJobDescription}
-                </Typography>
+                </div>
             )}
-            <Typography variant="body1" mb={2}>
+            <div style={{ marginBottom: "15px" }}>
                 <b>About me:</b> {profile.aboutMe}
-            </Typography>
-        </Box>
+            </div>
+        </div>
     );
 };
 

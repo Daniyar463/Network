@@ -23,10 +23,11 @@ export const getAuthUserData = createAsyncThunk(
 export const login = createAsyncThunk(
     "auth/login",
     async ({ email, password, rememberMe }, { dispatch }) => {
+        dispatch(toggleIsFetching(true));
         const response = await authAPI.login(email, password, rememberMe);
-        console.log("login....");
         if (response.data.resultCode === 0) {
             await dispatch(getAuthUserData());
+            dispatch(toggleIsFetching(false));
         }
     }
 );
@@ -54,6 +55,9 @@ const authSlice = createSlice({
             state.email = null;
             state.login = null;
             state.isAuth = false;
+        },
+        toggleIsFetching: (state, action) => {
+            state.isFetching = action.payload;
         },
     },
     extraReducers: (builder) => {
@@ -87,8 +91,7 @@ const authSlice = createSlice({
     },
 });
 
-export const { setAuthUserData, getAuthUserDataLogout } =
+export const { setAuthUserData, getAuthUserDataLogout, toggleIsFetching } =
     authSlice.actions;
 
 export default authSlice.reducer;
-
